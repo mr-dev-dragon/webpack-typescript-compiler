@@ -1,22 +1,23 @@
-
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.js',
-
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname,'public')
-    
-  },
+  devtool: 'source-map',
+  entry: './src/index.ts',
   module: {
     rules: [
       {
-        Test: /\.ts$/,
+        test: /\.ts$/,
+        include: [path.resolve(__dirname, 'src')],
         use: 'ts-loader',
-        include: path.resolve(__dirname, 'src') 
-        
       }
     ]
-  }
-}
+  },
+  resolve: {
+    extensions: ['.ts', '.js']
+  },
+  output: {
+    publicPath: 'public',
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'public'),
+  },
+};
